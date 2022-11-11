@@ -25,9 +25,9 @@ extern "C"
 
 //delayed until we fix line 5
 
-// goal:
-//     line1 NEWLINE line2 NEWLINE line3 NEWLINE line4 NEWLINE line5
-//     ;
+goal:
+    line1 NEWLINE line2 NEWLINE line3 NEWLINE line4 NEWLINE line5
+    ;
 
 line1:
     TRACE {
@@ -70,16 +70,16 @@ line4:
 // fifth line commented for now due to lack some yacc make syntax error
 
 
-// process:
-//     CHAR COMMA INT COMMA INT {
-//         printf("%s\n", $1);
-//        // printf("i am Line 5, name %s, AT %d, ST %d\n", $1, $3, %5);
-//     }
-//     ;
-// line5:
-//     process NEWLINE
-//     | line5 process NEWLINE
-//     ;
+process:
+    CHAR COMMA INT COMMA INT {
+        printf("%s\n", $1);
+       // printf("i am Line 5, name %s, AT %d, ST %d\n", $1, $3, %5);
+    }
+    ;
+line5:
+    process NEWLINE
+    | line5 process NEWLINE
+    ;
 
 %%
 void
