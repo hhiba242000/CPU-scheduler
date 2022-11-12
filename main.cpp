@@ -72,14 +72,25 @@ int main(){
     Process p4(6,5,"D");
     Process p5(8,2,"E");
 
-    ProcessScheduler scheduler(1,"trace",5,5,0);
+    ProcessScheduler scheduler(1,"trace",20,5,0);
     scheduler.processes.emplace_back(&p1);
     scheduler.processes.emplace_back(&p2);
     scheduler.processes.emplace_back(&p3);
     scheduler.processes.emplace_back(&p4);
     scheduler.processes.emplace_back(&p5);
 
-    printf("hey there hayam");
+    int arrivalT;
+    int serviceT;
+    int finishT;
+    int turnRT;
+    double normT;
+
+    scheduler.StartScheduler();
+    for(auto x:scheduler.processes){
+        printf("%s %d %d %d %d %.2f\n",x->name.c_str(),x->arrivalT,x->serviceT,x->finishT,x->turnRT,x->normT);
+    }
+    printf(" meanTurnR= %f meanNormT=%f\n",scheduler.meanTurnR,scheduler.meanNormT);
+//    scheduler.PrintSchedule("trace");
     return 0;
 }
 //trace

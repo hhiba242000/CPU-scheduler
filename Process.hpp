@@ -30,7 +30,7 @@ public:
     int serviceT;
     int finishT;
     int turnRT;
-    int normT;
+    double normT;
     std::string name;
     
 };

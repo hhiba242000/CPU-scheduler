@@ -16,8 +16,13 @@ all: test
 main.o: main.cpp
 	$(CC) -c main.cpp
 
-test: main.o
-	$(CC) -o test main.o
+ProcessScheduler.o: ProcessScheduler.cpp
+	$(CC) -c ProcessScheduler.cpp
+
+Process.o: Process.cpp
+	$(CC) -c Process.cpp
+test: main.o Process.o ProcessScheduler.o
+	$(CC) -o test Process.o ProcessScheduler.o main.o -ll
 #lab4: y.tab.o lex.yy.o
 #	$(CC) -o lab4 lex.yy.o y.tab.o
 
