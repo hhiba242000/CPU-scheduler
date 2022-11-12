@@ -2,7 +2,9 @@
 
 #include <string.h>
 #include "y.tab.h"
-
+// extern double yylval;
+void yyerror(char *s);
+int yylex();
 %}
 
 %%
@@ -34,10 +36,11 @@ stats {
 
 [a-zA-z] {
     printf("letter ");
-    //yylval.string_val = strdup(yytext);
+    yylval.string_val = strdup(yytext);
     return CHAR;
 }
-[0-9] {
+[0-9]+ {
+    yylval.string_val = strdup(yytext);
     printf("int ");
     return INT;
     }
@@ -53,3 +56,4 @@ stats {
 	}
 
 %%
+int yywrap(void) {return 1;}

@@ -5,7 +5,7 @@ CC = g++ -g
 
 all: lab4
 
-lex.yy.o: lab4.l 
+lex.yy.o: lab4.l
 	lex lab4.l
 	$(cc) -c lex.yy.c
 
@@ -15,7 +15,7 @@ y.tab.o: lab4.y
 
 
 lab4: y.tab.o lex.yy.o 
-	$(CC) -o lab4 lex.yy.o y.tab.o -ll
+	$(CC) -o lab4 lex.yy.o y.tab.o 
 
 clean:
 	rm -f lex.yy.c y.tab.c  y.tab.h lab4 *.o
