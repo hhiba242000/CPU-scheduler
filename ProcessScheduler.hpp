@@ -18,6 +18,7 @@
 #define ProcessScheduler_hpp
 
 #include <stdio.h>
+#include <utility>
 #include <vector>
 #include "Process.hpp"
 
@@ -25,9 +26,9 @@
 class ProcessScheduler{
     
 public:
-    ProcessScheduler(int policy,char* display,int lastInstant,int numOfProcess,int quantum){
+    ProcessScheduler(int policy,std::string display,int lastInstant,int numOfProcess,int quantum){
         this->policy = policy;
-        this->display = display;
+        this->display = std::move(display);
         this->lastInst = lastInstant;
         this->numOfProcess = numOfProcess;
         this->quantum = quantum;
@@ -37,9 +38,9 @@ public:
     ~ProcessScheduler()=default;
     
     
-    float CalculateMean();
+    void CalculateMean();
     void Prepare2DMatrix();
-    void PrintSchedule();
+    void PrintSchedule(std::string d);
     void StartScheduler();
     
     void FCFSSchedule();
@@ -47,16 +48,17 @@ public:
     void SPN();
     void SRT();
     void HRRN();
-    void FB(int quantum);
+    void FB(int q);
     void FB2();
     void Aging();
     
 public:
     int policy;
-    char* display;
+    std::string display;
     int lastInst;
     int quantum;
     int numOfProcess;
     std::vector<Process*> processes;
     char** matrixOfSchedule;
+    double meanTurnR, meanNormT;
 };

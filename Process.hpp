@@ -9,15 +9,17 @@
 #define Process_hpp
 
 #include <stdio.h>
+#include <string>
+#include <utility>
 
 #endif /* Process_hpp */
 class Process{
     
 public:
-    Process(int arrival,int service,char*name){
+    Process(int arrival,int service,std::string name){
         this->arrivalT = arrival;
         this->serviceT = service;
-        this->name = name;
+        this->name = std::move(name);
     }
     
     
@@ -29,6 +31,6 @@ public:
     int finishT;
     int turnRT;
     int normT;
-    char* name;
+    std::string name;
     
 };
