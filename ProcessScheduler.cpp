@@ -24,14 +24,6 @@ void ProcessScheduler::Prepare2DMatrix() {
 
 }
 
-//1. FCFS (First Come First Serve)
-//2. RR (Round Robin)
-//3. SPN (Shortest Process Next)
-//4. SRT (Shortest Remaining Time)
-//5. HRRN (Highest Response Ratio Next)
-//6. FB-1, (Feedback where all queues have q=1)
-//7. FB-2i, (Feedback where q= 2i)
-//8. Aging
 void ProcessScheduler::StartScheduler() {
     switch (this->policy) {
         case 1:
@@ -51,7 +43,7 @@ void ProcessScheduler::StartScheduler() {
             break;
         case 6:
             FB(this->quantum);
-            exit;
+            break;
         case 7:
             FB2();
             break;
@@ -65,16 +57,8 @@ void ProcessScheduler::StartScheduler() {
 }
 
 void ProcessScheduler::PrintSchedule(std::string d) {
-//    int numOfRows, numOfCols;
-//    if (d == "trace") {
-//        numOfCols = this->lastInst + 1;
-//        numOfRows = this->numOfProcess;
-//        this->traceDisplay = (char *) malloc(sizeof(char) * numOfCols * numOfRows);
-//    } else {
-//        numOfCols = this->numOfProcess;
-//        numOfRows = 6;
-//        this->traceDisplay = (char *) malloc(sizeof(char) * numOfCols * numOfRows);
-//    }
+//TODO: make a print for trace and a print for stats
+
     printf("---------------------------------------\n");
     for (int i = 0; i < this->numOfProcess; i++) {
         for (int j = 0; j < this->lastInst; j++) {
@@ -115,40 +99,12 @@ void ProcessScheduler::FCFSSchedule() {
         wait = x->serviceT + wait;
         printf("\n");
     }
-//
-//    printf("  ");
-//    for (int j = 0; j < this->lastInst; j++){
-//        printf("%d ",j%(this->lastInst/2));
-//    }
-//
-//    printf("\n");
-//    for (int i = 0; i < this->numOfProcess; i++) {
-//        Process *x = this->processes.at(i);
-//        printf("%s ",x->name.c_str());
-//        for (int j = 0; j < this->lastInst; j++) {
-//            if (i == 0  && x->serviceT > 0) {
-//                *(this->traceDisplay + i * this->numOfProcess + j) = '*';
-//               // printf("*|");
-//                x->serviceT--;
-//            } else {
-//                if (x->arrivalT <= j && x->serviceT > 0) {
-//                    char c = *(this->traceDisplay + ((i - 1) * this->numOfProcess) + j);
-//                    if (c == '*' || c == '.') {
-//                        *(this->traceDisplay + i * this->numOfProcess + j) = '.';
-////                        printf(".|");
-//                    } if(c == ' ') {
-//                        *(this->traceDisplay + i * this->numOfProcess + j) = '*';
-//                      //  printf("*|");
-//                        x->serviceT--;
-//                    }
-//                } else {
-//                    *(this->traceDisplay + i * this->numOfProcess + j) = ' ';
-//                   // printf(" |");
-//                }
-//            }
-//        }
-//        printf("\n");
-//    }
+
+    for (auto x: this->processes) {
+        printf("%c %d %d %d %d %.2f\n", x->name, x->arrivalT, x->serviceT, x->finishT, x->turnRT, x->normT);
+    }
+    printf(" meanTurnR= %f meanNormT=%f\n", this->meanTurnR, this->meanNormT);
+
 
     //make sure processes are sorted by arrival time
 
@@ -156,22 +112,72 @@ void ProcessScheduler::FCFSSchedule() {
 }
 
 void ProcessScheduler::RRSchedule(int q) {
-    std::queue<Process*> pq;
-    int tq = q,j=1;
-    pq.push(this->processes.at(0));
-    for(int i =0 ;i<this->lastInst;i++){
-        while(!pq.empty()){
-            Process* x= pq.front();
-            pq.pop();
-            while(tq>0){
-                printf("*|");
-                tq--;
-            }
-            for(;j<this->numOfProcess;){
+    //TODO: meanNormT=2.00 != 2.54 recheck CalculateMean()
+    std::queue<Process *> ready_p;
+    std::vector<char> result;
+    int timer = this->processes.at(0)->arrivalT, qtm = q, process_idx = 1;
+    ready_p.push(this->processes.at(0));
+    Process *x;
+    int arr[this->numOfProcess];
+    for (int p = 0; p < this->numOfProcess; p++)
+        arr[p] = this->processes.at(p)->serviceT;
 
+    while (!ready_p.empty() && timer < this->lastInst) {
+        x = ready_p.front();
+        ready_p.pop();
+        while (qtm > 0 && x->serviceT > 0) {
+            result.emplace_back(x->name);
+            qtm--;
+            timer++;
+            x->serviceT--;
+
+            for (int j = process_idx; j < this->numOfProcess; j++) {
+                if (this->processes.at(j)->arrivalT > timer) {
+                    process_idx = j;
+                    break;
+                }
+                if (this->processes.at(j)->arrivalT == timer) {
+                    ready_p.push(this->processes.at(j));
+                }
+            }
+
+        }
+        if (x->serviceT > 0)
+            ready_p.push(x);
+        else
+            x->finishT = timer;
+        qtm = q;
+    }
+
+    for (int p = 0; p < this->numOfProcess; p++)
+        this->processes.at(p)->serviceT = arr[p];
+
+    for (auto p: this->processes) {
+        for (int i = 0; i < p->arrivalT; i++) {
+            printf(" |");
+        }
+
+        for (int i = p->arrivalT; i < p->finishT; i++) {
+            if (result.at(i) != p->name) {
+                printf(".|");
+            } else {
+                printf("*|");
             }
         }
+
+        for (int i = p->finishT; i < this->lastInst; i++)
+            printf(" |");
+
+        p->turnRT = p->finishT - p->arrivalT;
+        p->normT = (p->turnRT * 1.0) / p->serviceT;
+        printf("\n");
     }
+    CalculateMean();
+    for (auto x: this->processes) {
+        printf("%c %d %d %d %d %.2f\n", x->name, x->arrivalT, x->serviceT, x->finishT, x->turnRT, x->normT);
+    }
+    printf(" meanTurnR= %f meanNormT=%f\n", this->meanTurnR, this->meanNormT);
+
 }
 
 void ProcessScheduler::FB(int q) {

@@ -16,10 +16,10 @@
 class Process{
     
 public:
-    Process(int arrival,int service,std::string name){
+    Process(int arrival,int service,char name){
         this->arrivalT = arrival;
         this->serviceT = service;
-        this->name = std::move(name);
+        this->name = name;
     }
     
     
@@ -31,6 +31,6 @@ public:
     int finishT;
     int turnRT;
     double normT;
-    std::string name;
+    char name;
     
 };

@@ -11,19 +11,19 @@
 #include <iostream>
 #include "ProcessScheduler.hpp"
 #include <vector>
+
 using namespace std;
 
 
-vector<string> mystrtok(string str, char delim){
+vector<string> mystrtok(string str, char delim) {
     vector<string> tokens;
     string temp = "";
-    for(int i = 0; i < str.length(); i++){
-        if(str[i] == delim){
+    for (int i = 0; i < str.length(); i++) {
+        if (str[i] == delim) {
             tokens.push_back(temp);
             temp = "";
-        }
-        else
-            temp += str[i];           
+        } else
+            temp += str[i];
     }
     tokens.push_back(temp);
     return tokens;
@@ -64,33 +64,71 @@ vector<string> mystrtok(string str, char delim){
 //
 //    return 0;
 //}
+void testFCFS() {
+    Process p1(0, 3, 'A');
+    Process p2(2, 6, 'B');
+    Process p3(4, 4, 'C');
+    Process p4(6, 5, 'D');
+    Process p5(8, 2, 'E');
 
-int main(){
-    Process p1(0,3,"A");
-    Process p2(2,6,"B");
-    Process p3(4,4,"C");
-    Process p4(6,5,"D");
-    Process p5(8,2,"E");
-
-    ProcessScheduler scheduler(1,"trace",20,5,0);
+    ProcessScheduler scheduler(1, "trace", 20, 5, 0);
     scheduler.processes.emplace_back(&p1);
     scheduler.processes.emplace_back(&p2);
     scheduler.processes.emplace_back(&p3);
     scheduler.processes.emplace_back(&p4);
     scheduler.processes.emplace_back(&p5);
 
-    int arrivalT;
-    int serviceT;
-    int finishT;
-    int turnRT;
-    double normT;
-
     scheduler.StartScheduler();
-    for(auto x:scheduler.processes){
-        printf("%s %d %d %d %d %.2f\n",x->name.c_str(),x->arrivalT,x->serviceT,x->finishT,x->turnRT,x->normT);
-    }
-    printf(" meanTurnR= %f meanNormT=%f\n",scheduler.meanTurnR,scheduler.meanNormT);
-//    scheduler.PrintSchedule("trace");
+}
+
+int main() {
+//    printf("hello");
+
+    ProcessScheduler scheduler(2, "trace", 20, 5, 2);
+    Process p1(0, 3, 'A');
+    Process p2(2, 6, 'B');
+    Process p3(4, 4, 'C');
+    Process p4(6, 5, 'D');
+    Process p5(8, 2, 'E');
+
+//    printf("welcome");
+
+    scheduler.processes.emplace_back(&p1);
+    scheduler.processes.emplace_back(&p2);
+    scheduler.processes.emplace_back(&p3);
+    scheduler.processes.emplace_back(&p4);
+    scheduler.processes.emplace_back(&p5);
+
+//    printf("back");
+    scheduler.StartScheduler();
+////    for (int i = 0; i < 5; i++) {
+//    for (int j = 0; j < 100; j++) {
+//        if (j < 5)
+//            *(scheduler.traceDisplay + j) = 'x';
+//
+//        else if (j < 15)
+//            *(scheduler.traceDisplay + j) = 'y';
+//
+//        else if (j < 20)
+//            *(scheduler.traceDisplay + j) = 'z';
+//        else
+//            *(scheduler.traceDisplay + j) = 'w';
+////        }
+//    }
+//
+//    // for (int i = 0; i < 5; i++) {
+//    for (int j = 0; j < 100; j++) {
+//        if (j>20 && *(scheduler.traceDisplay + j-20) != 'w')
+//            printf("o|");
+//       else  if ((j + 1) % 20 == 0 )
+//            printf(" \n");
+//        else
+//            printf("%c|", *(scheduler.traceDisplay + j));
+//        //  }
+//
+//
+//    }
+
     return 0;
 }
 //trace

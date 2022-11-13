@@ -21,7 +21,8 @@ ProcessScheduler.o: ProcessScheduler.cpp
 
 Process.o: Process.cpp
 	$(CC) -c Process.cpp
-test: main.o Process.o ProcessScheduler.o
+
+test: Process.o ProcessScheduler.o  main.o
 	$(CC) -o test Process.o ProcessScheduler.o main.o -ll
 #lab4: y.tab.o lex.yy.o
 #	$(CC) -o lab4 lex.yy.o y.tab.o
