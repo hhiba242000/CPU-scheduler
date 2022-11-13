@@ -6,6 +6,9 @@
 //
 
 #include "ProcessScheduler.hpp"
+#include <queue>
+
+//TODO: precisin should be same as in test file
 
 void ProcessScheduler::CalculateMean() {
     int sumOfTR = 0, sumOfNT = 0;
@@ -72,10 +75,10 @@ void ProcessScheduler::PrintSchedule(std::string d) {
 //        numOfRows = 6;
 //        this->traceDisplay = (char *) malloc(sizeof(char) * numOfCols * numOfRows);
 //    }
-printf("---------------------------------------\n");
+    printf("---------------------------------------\n");
     for (int i = 0; i < this->numOfProcess; i++) {
         for (int j = 0; j < this->lastInst; j++) {
-            printf("%c|", *(this->traceDisplay+i * this->numOfProcess + j));
+            printf("%c|", *(this->traceDisplay + i * this->numOfProcess + j));
         }
         printf("\n");
     }
@@ -83,33 +86,33 @@ printf("---------------------------------------\n");
 
 void ProcessScheduler::FCFSSchedule() {
     int wait = 0;
-    Process* x;
-    for(int j = 0;j<this->numOfProcess;j++){
-        x= this->processes.at(j);
-        for(int i = 0;i<x->arrivalT;i++){
+    Process *x;
+    for (int j = 0; j < this->numOfProcess; j++) {
+        x = this->processes.at(j);
+        for (int i = 0; i < x->arrivalT; i++) {
             *(this->traceDisplay + j * this->numOfProcess + i) = '*';
             printf(" |");
         }
 
-        for(int i = x->arrivalT;i<wait;i++){
+        for (int i = x->arrivalT; i < wait; i++) {
             *(this->traceDisplay + j * this->numOfProcess + i) = '.';
             printf(".|");
         }
 
-        for(int i=0;i<x->serviceT;i++){
+        for (int i = 0; i < x->serviceT; i++) {
             *(this->traceDisplay + j * this->numOfProcess + i) = '*';
             printf("*|");
         }
 
-        for(int i = wait+x->serviceT;i<this->lastInst;i++){
+        for (int i = wait + x->serviceT; i < this->lastInst; i++) {
             *(this->traceDisplay + j * this->numOfProcess + i) = ' ';
             printf(" |");
         }
-        x->finishT = wait+x->serviceT;
+        x->finishT = wait + x->serviceT;
         x->turnRT = x->finishT - x->arrivalT;
-        x->normT = (x->turnRT*1.0) / x->serviceT;
+        x->normT = (x->turnRT * 1.0) / x->serviceT;
         CalculateMean();
-        wait = x->serviceT+wait;
+        wait = x->serviceT + wait;
         printf("\n");
     }
 //
@@ -147,36 +150,51 @@ void ProcessScheduler::FCFSSchedule() {
 //        printf("\n");
 //    }
 
-            //make sure processes are sorted by arrival time
+    //make sure processes are sorted by arrival time
 
 
+}
+
+void ProcessScheduler::RRSchedule(int q) {
+    std::queue<Process*> pq;
+    int tq = q,j=1;
+    pq.push(this->processes.at(0));
+    for(int i =0 ;i<this->lastInst;i++){
+        while(!pq.empty()){
+            Process* x= pq.front();
+            pq.pop();
+            while(tq>0){
+                printf("*|");
+                tq--;
+            }
+            for(;j<this->numOfProcess;){
+
+            }
         }
+    }
+}
 
-        void ProcessScheduler::RRSchedule(int q) {
+void ProcessScheduler::FB(int q) {
 
-        }
+}
 
-        void ProcessScheduler::FB(int q) {
+void ProcessScheduler::FB2() {
 
-        }
+}
 
-        void ProcessScheduler::FB2() {
+void ProcessScheduler::Aging() {
 
-        }
+}
 
-        void ProcessScheduler::Aging() {
+void ProcessScheduler::SPN() {
 
-        }
+}
 
-        void ProcessScheduler::SPN() {
+void ProcessScheduler::SRT() {
 
-        }
+}
 
-        void ProcessScheduler::SRT() {
+void ProcessScheduler::HRRN() {
 
-        }
-
-        void ProcessScheduler::HRRN() {
-
-        }
+}
 
