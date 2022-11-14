@@ -7,6 +7,9 @@
 
 #include "ProcessScheduler.hpp"
 #include <queue>
+#include <set>
+
+using namespace std;
 
 //TODO: precisin should be same as in test file
 
@@ -50,7 +53,7 @@ void ProcessScheduler::StartScheduler() {
             HRRN();
             break;
         case 6:
-            FB(this->quantum);
+            FB(1);
             break;
         case 7:
             FB2();
@@ -122,6 +125,7 @@ void ProcessScheduler::RRSchedule(int q) {
     std::queue<Process *> ready_p;
     std::vector<char> result;
     int timer = this->processes.at(0)->arrivalT, qtm = q, process_idx = 1;
+    //TODO: or push all processes that arrived first to gether to include case if many processes arrived at 0
     ready_p.push(this->processes.at(0));
     Process *x;
     int arr[this->numOfProcess];
@@ -188,6 +192,97 @@ void ProcessScheduler::RRSchedule(int q) {
 
 void ProcessScheduler::FB(int q) {
 
+    int timer = 0, levels = 1, qtm = q, i, process_idx = 1;
+    vector<void *> vector_of_queues;
+    queue<Process *> first_queue = queue<Process *>();
+    vector<char> results;
+    int arr[this->numOfProcess];
+    for (int p = 0; p < this->numOfProcess; p++) {
+        arr[p] = this->processes.at(p)->serviceT;
+    }
+    first_queue.push(this->processes.at(0));
+    vector_of_queues.emplace_back(&first_queue);
+    while (timer < this->lastInst) {
+        i = 0;
+        while (i < levels) {
+
+            auto queue_temp = (queue<Process *> *) vector_of_queues.at(i);
+            auto process_temp = queue_temp->front();
+
+            if (!queue_temp->empty() && process_temp->arrivalT <= timer) {
+                queue_temp->pop();
+                while (qtm > 0 && process_temp->serviceT > 0) {
+                    results.emplace_back(process_temp->name);
+                    printf("processing %c\n", process_temp->name);
+                    process_temp->serviceT--;
+                    qtm--;
+                    timer++;
+                    for (int p = process_idx; p < this->numOfProcess; p++) {
+                        if (this->processes.at(p)->arrivalT > timer) {
+                            process_idx = p;
+                            break;
+                        }
+                        if (this->processes.at(p)->arrivalT == timer) {
+                            queue_temp->push(this->processes.at(p));
+                        }
+                    }
+
+                }
+                if (process_temp->serviceT > 0) {
+                    if (queue_temp->empty())
+                        queue_temp->push(process_temp);
+                    else {
+                        queue<Process *> new_queue;
+                        if (levels - i == 1)//i need a new queue
+                        {
+                            vector_of_queues.emplace_back(new queue<Process *>());
+                            levels++;
+                        }
+                        new_queue = *(queue<Process *> *) vector_of_queues.at(i + 1);
+                        new_queue.push(process_temp);
+
+                    }
+                } else {
+                    process_temp->finishT = timer;
+                }
+                qtm = q;
+            } else {
+                i++;
+            }
+        }
+        timer++;
+    }
+    for (int p = 0; p < this->numOfProcess; p++)
+        this->processes.at(p)->serviceT = arr[p];
+
+    for (auto c: results)
+        printf("%c ", c);
+    printf("\n");
+//    for (auto p: this->processes) {
+//        for (int i = 0; i < p->arrivalT; i++) {
+//            printf(" |");
+//        }
+//
+//        for (int i = p->arrivalT; i < p->finishT; i++) {
+//            if (results.at(i) != p->name) {
+//                printf(".|");
+//            } else {
+//                printf("*|");
+//            }
+//        }
+//
+//        for (int i = p->finishT; i < this->lastInst; i++)
+//            printf(" |");
+//
+//        p->turnRT = p->finishT - p->arrivalT;
+//        p->normT = (p->turnRT * 1.0) / p->serviceT;
+//        printf("\n");
+//    }
+//    CalculateMean();
+//    for (auto x: this->processes) {
+//        printf("%c %d %d %d %d %.2f\n", x->name, x->arrivalT, x->serviceT, x->finishT, x->turnRT, x->normT);
+//    }
+//    printf(" meanTurnR= %f meanNormT=%f\n", this->meanTurnR, this->meanNormT);
 }
 
 void ProcessScheduler::FB2() {
