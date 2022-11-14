@@ -21,8 +21,8 @@ public:
         this->serviceT = service;
         this->name = name;
     }
-    
-    
+
+
     ~Process()=default;
     
 public:

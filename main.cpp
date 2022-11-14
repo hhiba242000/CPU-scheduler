@@ -29,108 +29,94 @@ vector<string> mystrtok(string str, char delim) {
     return tokens;
 }
 
-//int main(int argc, const char * argv[]) {
-//    // insert code here...
-//
-//    while(true){
-//        //line 1
-//        string line1,line2,line3,line4,line5;
-//        getline(cin,line1);
-//        getline(cin,line2);
-//        getline(cin,line3);
-//        getline(cin,line4);
-//        vector <string> l5 ;
-//        getline(cin,line5);
-//        int i=0;
-//        while(!empty(line5)){
-//            l5 = mystrtok(line5, ',');
-//            for(string line5: l5)
-//            cout << line5 << endl;
-//            getline(cin,line5);
-//        }
-//        cout << line1 << "\n";
-//        //line 2
-//        vector<string> policies = mystrtok(line2, ',');
-//        for(string line2: policies)
-//            cout << line2 << endl;
-//        //line 3
-//        cout << line3 << "\n";
-//        //line 4
-//        cout << line4 << "\n";
-//        //line 5
-//        // for(string line5: l5)
-//        //     cout << line5 << endl;
-//}
-//
-//    return 0;
-//}
-void testFCFS() {
-    Process p1(0, 3, 'A');
-    Process p2(2, 6, 'B');
-    Process p3(4, 4, 'C');
-    Process p4(6, 5, 'D');
-    Process p5(8, 2, 'E');
+int main(){
+    //scanning input
+    string line1,line2,line3,line4,line5;
+    cin >> line1;
+    cin >> line2;
+    cin >> line3;
+    cin >> line4;
+    //line 1       
+    //line 2
+    int pno;
+    int qval=0;
+    int odd=0;
+    vector <string> pq;
+    vector<string> policies = mystrtok(line2, ',');
+    for(string line2: policies)
+        {
+            pq = mystrtok(line2,'-');
+            for(string policy : pq )
+            {
+                // to be implemented, process multiple scheduling types later
+                if(pq.size()==1)
+                    pno = stoi(policy);
+                else {
+                    if(odd==0)
+                        pno = stoi(policy);
+                    else
+                        qval = stoi(policy);
+                }
+                odd++;
+                //cout << policy << endl;
+            }
+        }
+    //line 3
+    int last_inst = stoi(line3);
+    //line 4
+    int proc_no = stoi(line4);
 
-    ProcessScheduler scheduler(1, "trace", 20, 5, 0);
-    scheduler.processes.emplace_back(&p1);
-    scheduler.processes.emplace_back(&p2);
-    scheduler.processes.emplace_back(&p3);
-    scheduler.processes.emplace_back(&p4);
-    scheduler.processes.emplace_back(&p5);
+    ProcessScheduler scheduler( pno, line1.c_str(), last_inst, proc_no, qval );
+
+    vector <string> l5 ;
+    cin >> line5; 
+    cin.ignore();
+    char pname[1];
+    int arrT, serT, i;
+
+    while(!line5.empty()){
+        i=0;
+        l5 = mystrtok(line5, ',');
+        for(string token5: l5){
+            if(i==0) strcpy(pname,token5.c_str());
+            else if(i==1) arrT=stoi(token5);
+            else serT=stoi(token5);
+            i++;
+        }
+        scheduler.processes.emplace_back(new Process(arrT,serT,pname[0]));
+        getline(cin,line5);   
+    }
+    // int arrivalT;
+    // int serviceT;
+    // int finishT;
+    // int turnRT;
+    // double normT;
 
     scheduler.StartScheduler();
-}
-
-int main() {
-//    printf("hello");
-
-    ProcessScheduler scheduler(2, "trace", 20, 5, 2);
-    Process p1(0, 3, 'A');
-    Process p2(2, 6, 'B');
-    Process p3(4, 4, 'C');
-    Process p4(6, 5, 'D');
-    Process p5(8, 2, 'E');
-
-//    printf("welcome");
-
-    scheduler.processes.emplace_back(&p1);
-    scheduler.processes.emplace_back(&p2);
-    scheduler.processes.emplace_back(&p3);
-    scheduler.processes.emplace_back(&p4);
-    scheduler.processes.emplace_back(&p5);
-
-//    printf("back");
-    scheduler.StartScheduler();
-////    for (int i = 0; i < 5; i++) {
-//    for (int j = 0; j < 100; j++) {
-//        if (j < 5)
-//            *(scheduler.traceDisplay + j) = 'x';
-//
-//        else if (j < 15)
-//            *(scheduler.traceDisplay + j) = 'y';
-//
-//        else if (j < 20)
-//            *(scheduler.traceDisplay + j) = 'z';
-//        else
-//            *(scheduler.traceDisplay + j) = 'w';
-////        }
-//    }
-//
-//    // for (int i = 0; i < 5; i++) {
-//    for (int j = 0; j < 100; j++) {
-//        if (j>20 && *(scheduler.traceDisplay + j-20) != 'w')
-//            printf("o|");
-//       else  if ((j + 1) % 20 == 0 )
-//            printf(" \n");
-//        else
-//            printf("%c|", *(scheduler.traceDisplay + j));
-//        //  }
-//
-//
-//    }
-
+    // for(auto x:scheduler.processes){
+    //     printf("%c %d %d %d %d %.2f\n",x->name.c_str(),x->arrivalT,x->serviceT,x->finishT,x->turnRT,x->normT);
+    // }
+    // printf(" meanTurnR= %f meanNormT=%f\n",scheduler.meanTurnR,scheduler.meanNormT);
     return 0;
 }
+    // for (Process temp: processes){
+    //     scheduler.processes.emplace_back(processes.back());
+    //     processes.pop_back();
+    // }
+    // Process p1("A",0,1);
+    // p1.insert("X",0,3);
+    // Process p2("B",2,6);
+    // Process p3("C",4,4);
+    // Process p4("D",6,5);
+    // Process p5("E",8,2);
+
+    
+    // scheduler.processes.emplace_back(&p1);
+    // scheduler.processes.emplace_back(&p2);
+    // scheduler.processes.emplace_back(&p3);
+    // scheduler.processes.emplace_back(&p4);
+    // scheduler.processes.emplace_back(&p5);
+
 //trace
 //1
 //20

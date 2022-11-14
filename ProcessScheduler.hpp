@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include <utility>
 #include <vector>
+#include <iostream>
 #include "Process.hpp"
 
 #endif /* ProcessScheduler_hpp */
