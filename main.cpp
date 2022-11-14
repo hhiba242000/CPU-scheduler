@@ -75,7 +75,7 @@ int main(){
     char pname[1];
     int arrT, serT, i;
 
-    while(!empty(line5)){
+    while(!line5.empty()){
         i=0;
         l5 = mystrtok(line5, ',');
         for(string token5: l5){
