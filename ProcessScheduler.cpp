@@ -213,24 +213,29 @@ void ProcessScheduler::FB(int q) {
                 queue_temp->pop();
                 while (qtm > 0 && process_temp->serviceT > 0) {
                     results.emplace_back(process_temp->name);
-                    printf("processing %c\n", process_temp->name);
+                    printf("inserting %c\n", process_temp->name);
                     process_temp->serviceT--;
                     qtm--;
                     timer++;
-                    for (int p = process_idx; p < this->numOfProcess; p++) {
+                    int p;
+                    for (p = process_idx; p < this->numOfProcess; p++) {
                         if (this->processes.at(p)->arrivalT > timer) {
-                            process_idx = p;
                             break;
                         }
                         if (this->processes.at(p)->arrivalT == timer) {
-                            queue_temp->push(this->processes.at(p));
+                            first_queue.push(this->processes.at(p));
+                            printf("inserting %c\n", process_temp->name);
+                            i=0;
                         }
                     }
+                    process_idx = p;
 
                 }
                 if (process_temp->serviceT > 0) {
-                    if (queue_temp->empty())
+                    if (queue_temp->empty()) {
+                        printf("processing %c\n", process_temp->name);
                         queue_temp->push(process_temp);
+                    }
                     else {
                         queue<Process *> new_queue;
                         if (levels - i == 1)//i need a new queue
