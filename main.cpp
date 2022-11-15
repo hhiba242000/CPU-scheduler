@@ -29,6 +29,12 @@ using namespace std;
 //    return tokens;
 //}
 
+struct LessThanBylevel {
+    bool operator()(const Process *lhs, const Process *rhs) const {
+        return lhs->level > rhs->level;
+    }
+};
+
 int main(){
 
     Process p1(0,3,'A');

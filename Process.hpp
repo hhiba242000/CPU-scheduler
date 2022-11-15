@@ -32,5 +32,6 @@ public:
     int turnRT;
     double normT;
     char name;
+    int level=0;
     
 };

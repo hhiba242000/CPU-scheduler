@@ -11,6 +11,11 @@
 
 using namespace std;
 
+struct LessThanByAge {
+    bool operator()(const Process *lhs, const Process *rhs) const {
+        return lhs->level > rhs->level;
+    }
+};
 //TODO: precisin should be same as in test file
 
 void ProcessScheduler::CalculateMean() {
@@ -191,103 +196,126 @@ void ProcessScheduler::RRSchedule(int q) {
 }
 
 void ProcessScheduler::FB(int q) {
-
-    int timer = 0, levels = 1, qtm = q, i, process_idx = 1;
-    vector<void *> vector_of_queues;
-    queue<Process *> first_queue = queue<Process *>();
-    vector<char> results;
-    int arr[this->numOfProcess];
-    for (int p = 0; p < this->numOfProcess; p++) {
-        arr[p] = this->processes.at(p)->serviceT;
-    }
-    first_queue.push(this->processes.at(0));
-    vector_of_queues.emplace_back(&first_queue);
+    priority_queue<Process *, std::vector<Process *>, LessThanByAge> priority_queue;
+    //TODO: add all processes that start at 0
+    priority_queue.push(this->processes.at(0));
+    vector<char> result;
+    int timer = 0, process_idx = 1, qtm = q;
     while (timer < this->lastInst) {
-        i = 0;
-        while (i < levels) {
-
-            auto queue_temp = (queue<Process *> *) vector_of_queues.at(i);
-            auto process_temp = queue_temp->front();
-
-            if (!queue_temp->empty() && process_temp->arrivalT <= timer) {
-                queue_temp->pop();
-                while (qtm > 0 && process_temp->serviceT > 0) {
-                    results.emplace_back(process_temp->name);
-                    printf("inserting %c\n", process_temp->name);
-                    process_temp->serviceT--;
-                    qtm--;
-                    timer++;
-                    int p;
-                    for (p = process_idx; p < this->numOfProcess; p++) {
-                        if (this->processes.at(p)->arrivalT > timer) {
-                            break;
-                        }
-                        if (this->processes.at(p)->arrivalT == timer) {
-                            first_queue.push(this->processes.at(p));
-                            printf("inserting %c\n", process_temp->name);
-                            i=0;
-                        }
-                    }
-                    process_idx = p;
-
+        Process *process_temp = priority_queue.top();
+        priority_queue.pop();
+        while (qtm > 0) {
+            // printf("im in execution loop\n");
+            // printf("%c ", process_temp->name);
+            result.emplace_back(process_temp->name);
+            printf("%d ",process_temp->level);
+            process_temp->serviceT--;
+            qtm--;
+            timer++;
+            for (int j = process_idx; j < this->numOfProcess; j++) {
+                if (this->processes.at(j)->arrivalT > timer) {
+                    process_idx = j;
+                    break;
                 }
-                if (process_temp->serviceT > 0) {
-                    if (queue_temp->empty()) {
-                        printf("processing %c\n", process_temp->name);
-                        queue_temp->push(process_temp);
-                    }
-                    else {
-                        queue<Process *> new_queue;
-                        if (levels - i == 1)//i need a new queue
-                        {
-                            vector_of_queues.emplace_back(new queue<Process *>());
-                            levels++;
-                        }
-                        new_queue = *(queue<Process *> *) vector_of_queues.at(i + 1);
-                        new_queue.push(process_temp);
-
-                    }
-                } else {
-                    process_temp->finishT = timer;
+                if (this->processes.at(j)->arrivalT == timer) {
+                    priority_queue.push(this->processes.at(j));
                 }
-                qtm = q;
-            } else {
-                i++;
             }
         }
-        timer++;
+        qtm = q;
+        if (process_temp->serviceT > 0) {
+            if (!priority_queue.empty())
+                process_temp->level++;
+            priority_queue.push(process_temp);
+        } else {
+            process_temp->finishT = timer;
+        }
     }
-    for (int p = 0; p < this->numOfProcess; p++)
-        this->processes.at(p)->serviceT = arr[p];
-
-    for (auto c: results)
+printf("\n");
+    for (auto c: result)
         printf("%c ", c);
-    printf("\n");
-//    for (auto p: this->processes) {
-//        for (int i = 0; i < p->arrivalT; i++) {
-//            printf(" |");
-//        }
+
+
+
+
+
+//    int timer = 0, levels = 1, qtm = q, i, process_idx = 1;
+//    vector<void *> vector_of_queues;
+//    queue<Process *> first_queue = queue<Process *>();
+//    vector<char> results;
+//    int arr[this->numOfProcess];
+//    for (int p = 0; p < this->numOfProcess; p++) {
+//        arr[p] = this->processes.at(p)->serviceT;
+//    }
+//    int proc_num=0;
+//    first_queue.push(this->processes.at(0));
+//    vector_of_queues.emplace_back(&first_queue);
 //
-//        for (int i = p->arrivalT; i < p->finishT; i++) {
-//            if (results.at(i) != p->name) {
-//                printf(".|");
+//    while (timer < this->lastInst) {
+//        i = 0;
+//        while (i < levels) {
+//
+//            auto queue_temp = (queue<Process *> *) vector_of_queues.at(i);
+//            auto process_temp = queue_temp->front();
+//
+//            if (!queue_temp->empty() && process_temp->arrivalT <= timer) {
+//                queue_temp->pop();
+//                while (qtm > 0 && process_temp->serviceT > 0) {
+//                    results.emplace_back(process_temp->name);
+//                    printf("inserting %c\n", process_temp->name);
+//                    process_temp->serviceT--;
+//                    qtm--;
+//                    timer++;
+//                    int p;
+//                    for (p = process_idx; p < this->numOfProcess; p++) {
+//                        if (this->processes.at(p)->arrivalT > timer) {
+//                            break;
+//                        }
+//                        if (this->processes.at(p)->arrivalT == timer) {
+//                            first_queue.push(this->processes.at(p));
+//                            proc_num++;
+//                            printf("inserting %c\n", process_temp->name);
+//                            i=0;
+//                        }
+//                    }
+//                    process_idx = p;
+//
+//                }
+//                if (process_temp->serviceT > 0) {
+//                    if (proc_num == 1) {
+//                        printf("processing %c\n", process_temp->name);
+//                        queue_temp->push(process_temp);
+//                    }
+//                    else {
+//                        queue<Process *> new_queue;
+//                        if (levels - i == 1)//i need a new queue
+//                        {
+//                            vector_of_queues.emplace_back(new queue<Process *>());
+//                            levels++;
+//                        }
+//                        new_queue = *(queue<Process *> *) vector_of_queues.at(i + 1);
+//                        new_queue.push(process_temp);
+//                        //proc_num++;
+//
+//                    }
+//                } else {
+//                    process_temp->finishT = timer;
+//                    proc_num--;
+//                }
+//                qtm = q;
 //            } else {
-//                printf("*|");
+//                i++;
 //            }
 //        }
-//
-//        for (int i = p->finishT; i < this->lastInst; i++)
-//            printf(" |");
-//
-//        p->turnRT = p->finishT - p->arrivalT;
-//        p->normT = (p->turnRT * 1.0) / p->serviceT;
-//        printf("\n");
+//        timer++;
 //    }
-//    CalculateMean();
-//    for (auto x: this->processes) {
-//        printf("%c %d %d %d %d %.2f\n", x->name, x->arrivalT, x->serviceT, x->finishT, x->turnRT, x->normT);
-//    }
-//    printf(" meanTurnR= %f meanNormT=%f\n", this->meanTurnR, this->meanNormT);
+//    for (int p = 0; p < this->numOfProcess; p++)
+//        this->processes.at(p)->serviceT = arr[p];
+//
+//    for (auto c: results)
+//        printf("%c ", c);
+//    printf("\n");
+
 }
 
 void ProcessScheduler::FB2() {
