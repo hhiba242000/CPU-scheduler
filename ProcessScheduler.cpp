@@ -14,13 +14,13 @@ using namespace std;
 
 struct LessThanByAge {
     bool operator()(const Process *lhs, const Process *rhs) const {
-        return lhs->level > rhs->level || (lhs->level == rhs->level && lhs->name > rhs->name);
+        return lhs->level > rhs->level || (lhs->level == rhs->level && lhs->arrivalT > rhs->arrivalT);
     }
 };
 //TODO: precisin should be same as in test file
 
 void ProcessScheduler::CalculateMean() {
-    int sumOfTR = 0, sumOfNT = 0;
+    float sumOfTR = 0, sumOfNT = 0;
     for (auto x: this->processes) {
         sumOfNT += x->normT;
         sumOfTR += x->turnRT;
@@ -436,8 +436,72 @@ void ProcessScheduler::Aging() {
 }
 
 void ProcessScheduler::SPN() {
+    int wait = 0, timer=0;
+    priority_queue<Process *, std::vector<Process *>, LessThanByAge> priority_queue;
+    Process *x;
+    vector <char> result;
+    this->processes.at(0)->level=this->processes.at(0)->serviceT;
+    priority_queue.push(this->processes.at(0));
+    x = priority_queue.top();
+    priority_queue.pop();
 
-}
+    for (int j = 1; j <= this->numOfProcess; j++) {
+        timer+=x->serviceT;
+        x->finishT=timer;
+        //x->finishT = wait + x->serviceT;
+        x->turnRT = x->finishT - x->arrivalT;
+        x->normT = (x->turnRT * 1.0) / x->serviceT;
+        //CalculateMean();
+        wait = x->serviceT + wait;
+        // printf("\n");
+        
+        //printf("%d\n", timer);
+        for(int i=j; i<this->numOfProcess; i++){
+            if(priority_queue.size()==this->numOfProcess-j)
+                break;
+            if(this->processes.at(i)->arrivalT <= timer){
+                this->processes.at(i)->level=this->processes.at(i)->serviceT;
+                priority_queue.push(this->processes.at(i));
+            }
+        }
+        for(int i=0;i<x->serviceT;i++)
+            result.emplace_back(x->name);
+        x = priority_queue.top();
+        priority_queue.pop();
+        
+    }
+    for(char res:result)
+        printf("%c ", res);
+        printf("\n");
+    for (auto p: this->processes) {
+        for (int i = 0; i < p->arrivalT; i++) {
+            printf(" |");
+        }
+
+        for (int i = p->arrivalT; i < p->finishT; i++) {
+            if (result.at(i) != p->name) {
+                printf(".|");
+            } else {
+                printf("*|");
+            }
+        }
+
+        for (int i = p->finishT; i < this->lastInst; i++)
+            printf(" |");
+
+        p->turnRT = p->finishT - p->arrivalT;
+        p->normT = (p->turnRT * 1.0) / p->serviceT;
+        printf("\n");
+        
+    }
+    CalculateMean();
+    for (auto x: this->processes) {
+        printf("%c %d %d %d %d %.2f\n", x->name, x->arrivalT, x->serviceT, x->finishT, x->turnRT, x->normT);
+    }
+    printf(" meanTurnR= %f meanNormT=%f\n", this->meanTurnR, this->meanNormT);
+
+    
+    }
 
 void ProcessScheduler::SRT() {
 
