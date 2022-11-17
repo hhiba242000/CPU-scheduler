@@ -52,7 +52,7 @@ public:
     void HRRN();
     void FB(int q);
     void FB2();
-    void Aging();
+    void Aging(int q);
     
 public:
     int policy;
@@ -62,7 +62,7 @@ public:
     int numOfProcess;
     std::vector<Process*> processes;
     char** matrixOfSchedule;
-    double meanTurnR, meanNormT;
+    float meanTurnR, meanNormT;
     char* traceDisplay;
     char* statsDisplay;
 };

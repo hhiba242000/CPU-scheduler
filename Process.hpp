@@ -32,6 +32,7 @@ public:
     int turnRT;
     double normT;
     char name;
-    int level=0;
+    float level=0;
+    int wait;
     
 };
