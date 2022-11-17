@@ -12,9 +12,15 @@
 
 using namespace std;
 
-struct LessThanByAge {
+
+struct LessThanByLevel {
     bool operator()(const Process *lhs, const Process *rhs) const {
         return lhs->level > rhs->level || (lhs->level == rhs->level && lhs->arrivalT > rhs->arrivalT);
+    }
+};
+struct LessThanByAging {
+    bool operator()(const Process *lhs, const Process *rhs) const {
+        return lhs->level < rhs->level;
     }
 };
 //TODO: precisin should be same as in test file
@@ -197,7 +203,7 @@ void ProcessScheduler::RRSchedule(int q) {
 }
 
 void ProcessScheduler::FB(int q) {
-    priority_queue<Process *, std::vector<Process *>, LessThanByAge> priority_queue;
+    priority_queue<Process *, std::vector<Process *>, LessThanByLevel> priority_queue;
     priority_queue.push(this->processes.at(0));
     vector<char> result, res;
     int timer = 0, process_idx = 1, qtm = q;
@@ -352,7 +358,7 @@ void ProcessScheduler::FB(int q) {
 }
 
 void ProcessScheduler::FB2() {
-    priority_queue<Process *, std::vector<Process *>, LessThanByAge> priority_queue;
+    priority_queue<Process *, std::vector<Process *>, LessThanByLevel> priority_queue;
     priority_queue.push(this->processes.at(0));
     vector<char> result, res;
     int timer = 0, process_idx = 1, qtm;
@@ -435,7 +441,7 @@ void ProcessScheduler::Aging(int q) {
     //
     // Priority     =    ServiceT
     //
-    priority_queue<Process *, std::vector<Process *>, LessThanByAge> ready_p;
+    priority_queue<Process *, std::vector<Process *>, LessThanByAging> ready_p;
     q=1;
     std::vector<char> result;
     int timer = this->processes.at(0)->arrivalT, qtm = q, process_idx = 1;
@@ -446,18 +452,24 @@ void ProcessScheduler::Aging(int q) {
     int arr[this->numOfProcess];
     for (int p = 0; p < this->numOfProcess; p++)
         arr[p] = this->processes.at(p)->serviceT;
-
     while (!ready_p.empty() && timer < this->lastInst) {
         x = ready_p.top();
         ready_p.pop();
+        printf("executing %c, has priority %.f\n", x->name, x->level);
+
+        
         while (qtm > 0) {
             result.emplace_back(x->name);
+            x->level=x->serviceT;
             qtm--;
             timer++;
-            x->level++;
+            x->level--;
+            printf("Queue: ");
             for(int p=0; p<this->numOfProcess; p++){
-                if(this->processes.at(p)->arrivalT<=timer)
-                    this->processes.at(p)->level--;
+                if(this->processes.at(p)->arrivalT<timer){
+                    this->processes.at(p)->level++;
+                    printf("%c %.f\t", this->processes.at(p)->name, this->processes.at(p)->level);
+                    }
             }
                 
             for (int j = process_idx; j < this->numOfProcess; j++) {
@@ -466,11 +478,12 @@ void ProcessScheduler::Aging(int q) {
                     break;
                 }
                 if (this->processes.at(j)->arrivalT == timer) {
-                    this->processes.at(j)->level--;
+                    this->processes.at(j)->level=this->processes.at(j)->serviceT+1;
                     ready_p.push(this->processes.at(j));
+                    printf("*%c %.f\t", this->processes.at(j)->name, this->processes.at(j)->level);
                 }
             }
-
+            printf("\n");
         }
         //if (x->serviceT > 0)
         ready_p.push(x);
@@ -516,7 +529,7 @@ void ProcessScheduler::Aging(int q) {
 
 void ProcessScheduler::SPN() {
     int wait = 0, timer=0;
-    priority_queue<Process *, std::vector<Process *>, LessThanByAge> priority_queue;
+    priority_queue<Process *, std::vector<Process *>, LessThanByLevel> priority_queue;
     Process *x;
     vector <char> result;
     this->processes.at(0)->level=this->processes.at(0)->serviceT;
@@ -584,7 +597,7 @@ void ProcessScheduler::SPN() {
 
 void ProcessScheduler::SRT() {
         //TODO: meanNormT=2.00 != 2.54 recheck CalculateMean()
-    priority_queue<Process *, std::vector<Process *>, LessThanByAge> ready_p;
+    priority_queue<Process *, std::vector<Process *>, LessThanByLevel> ready_p;
     std::vector<char> result;
     int timer = this->processes.at(0)->arrivalT, qtm = 1, process_idx = 1;
     //TODO: or push all processes that arrived first to gether to include case if many processes arrived at 0
@@ -657,7 +670,7 @@ void ProcessScheduler::SRT() {
 
 void ProcessScheduler::HRRN() {
      int wait = 0, timer=0;
-    priority_queue<Process *, std::vector<Process *>, LessThanByAge> priority_queue;
+    priority_queue<Process *, std::vector<Process *>, LessThanByLevel> priority_queue;
     Process *x;
     vector <char> result;
     this->processes.at(0)->level=this->processes.at(0)->serviceT;
