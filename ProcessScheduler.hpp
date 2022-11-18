@@ -50,7 +50,7 @@ public:
     void SPN();
     void SRT();
     void HRRN();
-    void FB(int q);
+    void FB();
     void FB2();
     void Aging(int q);
     

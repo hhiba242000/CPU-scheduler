@@ -65,13 +65,13 @@ void ProcessScheduler::StartScheduler() {
             HRRN();
             break;
         case 6:
-            FB(1);
+            FB();
             break;
         case 7:
             FB2();
             break;
         case 8:
-            Aging(1);
+            Aging(this->quantum);
             break;
         default:
             printf("Error parsing input file");
@@ -202,10 +202,11 @@ void ProcessScheduler::RRSchedule(int q) {
 
 }
 
-void ProcessScheduler::FB(int q) {
+void ProcessScheduler::FB() {
     priority_queue<Process *, std::vector<Process *>, LessThanByLevel> priority_queue;
     priority_queue.push(this->processes.at(0));
     vector<char> result, res;
+    int q=1;
     int timer = 0, process_idx = 1, qtm = q;
     int arr[this->numOfProcess];
     for (int p = 0; p < this->numOfProcess; p++)
@@ -442,7 +443,6 @@ void ProcessScheduler::Aging(int q) {
     // Priority     =    ServiceT
     //
     priority_queue<Process *, std::vector<Process *>, LessThanByAging> ready_p;
-    q=1;
     std::vector<char> result;
     int timer = this->processes.at(0)->arrivalT, qtm = q, process_idx = 1;
     this->processes.at(0)->level=this->processes.at(0)->serviceT;
