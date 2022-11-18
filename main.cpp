@@ -51,7 +51,7 @@ int main(){
     Process p4(6,5,'D');
     Process p5(8,2,'E');
 
-    ProcessScheduler scheduler(3,"stats",20,5,4);
+    ProcessScheduler scheduler(3,"trace",20,5,4);
     scheduler.processes.emplace_back(&p1);
     scheduler.processes.emplace_back(&p2);
     scheduler.processes.emplace_back(&p3);
