@@ -35,6 +35,14 @@ struct LessThanBylevel {
     }
 };
 
+//1. FCFS (First Come First Serve)
+//2. RR (Round Robin)
+//3. SPN (Shortest Process Next)
+//4. SRT (Shortest Remaining Time)
+//5. HRRN (Highest Response Ratio Next)
+//6. FB-1, (Feedback where all queues have q=1)
+//7. FB-2i, (Feedback where q= 2i)
+//8. Aging
 int main(){
 
     Process p1(0,3,'A');
@@ -43,7 +51,7 @@ int main(){
     Process p4(6,5,'D');
     Process p5(8,2,'E');
 
-    ProcessScheduler scheduler(8,"trace",20,5,1);
+    ProcessScheduler scheduler(3,"stats",20,5,4);
     scheduler.processes.emplace_back(&p1);
     scheduler.processes.emplace_back(&p2);
     scheduler.processes.emplace_back(&p3);

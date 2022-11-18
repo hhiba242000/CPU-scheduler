@@ -53,7 +53,10 @@ public:
     void FB(int q);
     void FB2();
     void Aging(int q);
-    
+    void PrintResultsDebugMode();
+    void PrintTraceResults();
+    void PrintStatsResults();
+
 public:
     int policy;
     std::string display;
@@ -65,4 +68,5 @@ public:
     float meanTurnR, meanNormT;
     char* traceDisplay;
     char* statsDisplay;
+    std::vector<char> results;
 };
