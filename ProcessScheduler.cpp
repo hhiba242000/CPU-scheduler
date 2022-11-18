@@ -59,7 +59,7 @@ void ProcessScheduler::Prepare2DMatrix() {
 }
 
 void ProcessScheduler::PrintTraceResults() {
-    for (int i = 0; i < this->lastInst + 1; i++) printf("%d ", i % (this->lastInst / 2));
+    for (int i = 0; i < this->lastInst + 1; i++) printf(" %d", i % (this->lastInst / 2));
     printf("\n");
     for (int i = 0; i < 8 + 2 * this->lastInst; i++) printf("-");
     printf("\n");
@@ -175,7 +175,7 @@ void ProcessScheduler::PrintSchedule(std::string d) {
 }
 
 void ProcessScheduler::FCFSSchedule() {
-    printf("FCFS  ");
+    printf("FCFS ");
     int wait;
     if (this->display == "trace") {
         for (int i = 0; i < this->lastInst + 1; i++) printf("%d ", i % (this->lastInst / 2));
@@ -267,7 +267,7 @@ void ProcessScheduler::RRSchedule(int q) {
     for (int p = 0; p < this->numOfProcess; p++)
         this->processes.at(p)->serviceT = arr[p];
 
-    printf("RR-%d  ", this->quantum);
+    printf("RR-%d ", this->quantum);
     if (this->display == "trace") {
         PrintTraceResults();
     }
@@ -323,7 +323,7 @@ void ProcessScheduler::FB(int q) {
     for (int p = 0; p < this->numOfProcess; p++)
         this->processes.at(p)->serviceT = arr[p];
 
-    printf("FB-%d  ", this->quantum);
+    printf("FB-%d ", this->quantum);
 
     if (this->display == "trace") {
         PrintTraceResults();
@@ -382,7 +382,7 @@ void ProcessScheduler::FB2() {
     for (int p = 0; p < this->numOfProcess; p++)
         this->processes.at(p)->serviceT = arr[p];
 
-    printf("FB-2i ");
+    printf("FB-2i");
     if (this->display == "trace") {
         PrintTraceResults();
     }
@@ -508,7 +508,7 @@ void ProcessScheduler::SPN() {
 
     }
 
-    printf("SPN   ");
+    printf("SPN  ");
     if (this->display == "trace") {
         PrintTraceResults();
     }
@@ -564,7 +564,7 @@ void ProcessScheduler::SRT() {
     for (int p = 0; p < this->numOfProcess; p++)
         this->processes.at(p)->serviceT = arr[p];
 
-    printf("SRT   ");
+    printf("SRT  ");
     if (this->display == "trace") {
         PrintTraceResults();
     }
@@ -618,7 +618,7 @@ void ProcessScheduler::HRRN() {
 
     }
 
-    printf("HRRN  ");
+    printf("HRRN ");
     if (this->display == "trace")
         PrintTraceResults();
     if (this->display == "stats")
