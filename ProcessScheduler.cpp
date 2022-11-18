@@ -79,7 +79,7 @@ void ProcessScheduler::PrintTraceResults() {
 
         for (int i = p->finishT; i < this->lastInst; i++)
             printf(" |");
-        printf("\n");
+        printf(" \n");
 
     }
     for (int i = 0; i < 8 + 2 * this->lastInst; i++) printf("-");
@@ -323,7 +323,7 @@ void ProcessScheduler::FB(int q) {
     for (int p = 0; p < this->numOfProcess; p++)
         this->processes.at(p)->serviceT = arr[p];
 
-    printf("FB-%d ", this->quantum);
+    printf("FB-%d  ", this->quantum);
 
     if (this->display == "trace") {
         PrintTraceResults();
@@ -382,7 +382,7 @@ void ProcessScheduler::FB2() {
     for (int p = 0; p < this->numOfProcess; p++)
         this->processes.at(p)->serviceT = arr[p];
 
-    printf("FB-2i");
+    printf("FB-2i ");
     if (this->display == "trace") {
         PrintTraceResults();
     }
@@ -564,7 +564,7 @@ void ProcessScheduler::SRT() {
     for (int p = 0; p < this->numOfProcess; p++)
         this->processes.at(p)->serviceT = arr[p];
 
-    printf("SRT  ");
+    printf("SRT   ");
     if (this->display == "trace") {
         PrintTraceResults();
     }
@@ -618,7 +618,7 @@ void ProcessScheduler::HRRN() {
 
     }
 
-    printf("HRRN ");
+    printf("HRRN  ");
     if (this->display == "trace")
         PrintTraceResults();
     if (this->display == "stats")
