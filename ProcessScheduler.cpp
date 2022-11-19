@@ -295,8 +295,10 @@ void ProcessScheduler::FB() {
 
     int timer = 0, process_idx = 1;
     int arr[this->numOfProcess];
-    for (int p = 0; p < this->numOfProcess; p++)
+    for (int p = 0; p < this->numOfProcess; p++){
         arr[p] = this->processes.at(p)->serviceT;
+        this->processes.at(p)->level=0;
+        }
     while (timer < this->lastInst) {
         Process *process_temp = priority_queue.top();
         priority_queue.pop();
@@ -354,8 +356,10 @@ void ProcessScheduler::FB2() {
             priority_queue.push(this->processes.at(0));
 
     int arr[this->numOfProcess];
-    for (int p = 0; p < this->numOfProcess; p++)
+    for (int p = 0; p < this->numOfProcess; p++){
         arr[p] = this->processes.at(p)->serviceT;
+        this->processes.at(p)->level=0;
+        }
 
     while (timer < this->lastInst) {
         Process *process_temp = priority_queue.top();
