@@ -18,6 +18,7 @@ struct LessThanByLevel {
         return lhs->level > rhs->level || (lhs->level == rhs->level && lhs->arrivalT > rhs->arrivalT);
     }
 };
+
 struct LessThanByAging {
     bool operator()(const Process *lhs, const Process *rhs) const {
         return lhs->level < rhs->level;
@@ -206,11 +207,14 @@ void ProcessScheduler::FB() {
     priority_queue<Process *, std::vector<Process *>, LessThanByLevel> priority_queue;
     priority_queue.push(this->processes.at(0));
     vector<char> result, res;
+
     int q=1;
     int timer = 0, process_idx = 1, qtm = q;
     int arr[this->numOfProcess];
-    for (int p = 0; p < this->numOfProcess; p++)
+    for (int p = 0; p < this->numOfProcess; p++){
         arr[p] = this->processes.at(p)->serviceT;
+        this->processes.at(p)->level=0;
+        }
     while (timer < this->lastInst) {
         Process *process_temp = priority_queue.top();
         priority_queue.pop();
@@ -365,8 +369,10 @@ void ProcessScheduler::FB2() {
     int timer = 0, process_idx = 1, qtm;
 
     int arr[this->numOfProcess];
-    for (int p = 0; p < this->numOfProcess; p++)
+    for (int p = 0; p < this->numOfProcess; p++){
         arr[p] = this->processes.at(p)->serviceT;
+        this->processes.at(p)->level=0;
+        }
 
     while (timer < this->lastInst ) {
         Process *process_temp = priority_queue.top();
