@@ -20,8 +20,94 @@
   <component name="ChangeListManager">
     <list default="true" id="a0acf719-1821-4aaa-ae21-eaaa5b264639" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Process.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProcessScheduler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ProcessScheduler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProcessScheduler.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ProcessScheduler.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProcessScheduler.o" beforeDir="false" afterPath="$PROJECT_DIR$/ProcessScheduler.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/in" beforeDir="false" afterPath="$PROJECT_DIR$/in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/01a-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/01a-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/01a-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/01a-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/01b-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/01b-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/01b-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/01b-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/02a-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/02a-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/02a-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/02a-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/02b-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/02b-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/02b-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/02b-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/03a-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/03a-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/03a-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/03a-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/03b-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/03b-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/03b-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/03b-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/04a-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/04a-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/04a-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/04a-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/04b-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/04b-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/04b-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/04b-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/05a-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/05a-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/05a-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/05a-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/05b-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/05b-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/05b-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/05b-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/06a-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/06a-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/06a-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/06a-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/06b-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/06b-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/06b-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/06b-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/07a-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/07a-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/07a-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/07a-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/07b-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/07b-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/07b-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/07b-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/08a-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/08a-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/08a-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/08a-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/08b-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/08b-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/08b-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/08b-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/09a-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/09a-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/09a-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/09a-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/09b-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/09b-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/09b-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/09b-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/10a-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/10a-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/10a-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/10a-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/10b-input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/10b-input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/10b-output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lab4-testcases-v7/10b-output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/01a-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/01a-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/01b-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/01b-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/02a-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/02a-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/02b-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/02b-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/03a-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/03a-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/03b-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/03b-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/04a-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/04a-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/04b-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/04b-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/05a-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/05a-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/05b-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/05b-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/06a-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/06a-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/06b-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/06b-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/07a-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/07a-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/07b-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/07b-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/08a-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/08a-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/08b-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/08b-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/09a-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/09a-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/09b-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/09b-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/10a-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/10a-output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/10b-input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases/10b-output.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/main.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test" beforeDir="false" afterPath="$PROJECT_DIR$/test" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,6 +150,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "last_opened_file_path": "/home/hayam/Desktop/CPU-scheduler",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -72,6 +159,11 @@
     "structure.view.defaults.are.configured": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunManager" selected="Makefile Application.all">
     <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CPU-scheduler" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="test">
       <method v="2">
@@ -99,6 +191,8 @@
       <workItem from="1668209390886" duration="4312000" />
       <workItem from="1668241499309" duration="245000" />
       <workItem from="1668509002587" duration="17373000" />
+      <workItem from="1668704574953" duration="19421000" />
+      <workItem from="1668874786689" duration="4393000" />
     </task>
     <servers />
   </component>
