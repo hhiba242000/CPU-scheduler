@@ -33,7 +33,9 @@ public:
         this->lastInst = lastInstant;
         this->numOfProcess = numOfProcess;
         this->quantum = quantum;
-        matrixOfSchedule = (char**)malloc(sizeof(char*) * numOfProcess);
+        this->traceDisplay = (char*) malloc(sizeof(char)*numOfProcess*lastInstant);
+        this->results.clear();
+        //matrixOfSchedule = (char**)malloc(sizeof(char*) * numOfProcess);
     }
     
     ~ProcessScheduler()=default;
@@ -49,10 +51,13 @@ public:
     void SPN();
     void SRT();
     void HRRN();
-    void FB(int quantum);
+    void FB();
     void FB2();
-    void Aging();
-    
+    void Aging(int q);
+    void PrintResultsDebugMode();
+    void PrintTraceResults();
+    void PrintStatsResults();
+
 public:
     int policy;
     std::string display;
@@ -61,6 +66,8 @@ public:
     int numOfProcess;
     std::vector<Process*> processes;
     char** matrixOfSchedule;
-    double meanTurnR = 0.0;
-    double meanNormT = 0.0;
+    float meanTurnR, meanNormT;
+    char* traceDisplay;
+    char* statsDisplay;
+    std::vector<char> results;
 };

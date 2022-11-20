@@ -9,18 +9,20 @@
 #define Process_hpp
 
 #include <stdio.h>
+#include <string>
+#include <utility>
 
 #endif /* Process_hpp */
 class Process{
     
 public:
-    Process(int arrival,int service,char*name){
+    Process(int arrival,int service,char name){
         this->arrivalT = arrival;
         this->serviceT = service;
         this->name = name;
     }
-    
-    
+
+
     ~Process()=default;
     
 public:
@@ -28,7 +30,10 @@ public:
     int serviceT;
     int finishT;
     int turnRT;
-    int normT;
-    char* name;
+    double normT;
+    char name;
+    float level=0;
+    int wait;
+    int lastPush;
     
 };
