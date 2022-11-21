@@ -18,58 +18,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0acf719-1821-4aaa-ae21-eaaa5b264639" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Process.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProcessScheduler.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/01a-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/01a-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/01b-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/01b-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/02a-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/02a-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/02b-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/02b-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/03a-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/03a-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/03b-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/03b-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/04a-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/04a-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/04b-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/04b-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/05a-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/05a-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/05b-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/05b-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/06a-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/06a-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/06b-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/06b-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/07a-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/07a-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/07b-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/07b-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/08a-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/08a-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/08b-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/08b-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/09a-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/09a-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/09b-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/09b-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/10a-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/10a-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/10b-input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab4-initial-testcases-v7/10b-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Process.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Process.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProcessScheduler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ProcessScheduler.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test" beforeDir="false" />
-    </list>
+    <list default="true" id="a0acf719-1821-4aaa-ae21-eaaa5b264639" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

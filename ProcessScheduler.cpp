@@ -39,16 +39,6 @@ struct LessThanByAging {
         return lhs->level < rhs->level || (lhs->level == rhs->level && lhs->lastPush > rhs->lastPush);
     }
 };
-//TODO: precisin should be same as in test file
-
-void ProcessScheduler::PrintResultsDebugMode() {
-    //for debugging
-    printf("\n");
-    for (auto c: this->results)
-        printf("%c ", c);
-
-    printf("end");
-}
 
 void ProcessScheduler::CalculateMean() {
     float sumOfTR = 0, sumOfNT = 0;
@@ -60,9 +50,6 @@ void ProcessScheduler::CalculateMean() {
     this->meanNormT = sumOfNT / (1.0 * this->numOfProcess);
 }
 
-void ProcessScheduler::Prepare2DMatrix() {
-
-}
 
 void ProcessScheduler::PrintTraceResults() {
     for (int i = 0; i < this->lastInst + 1; i++) printf("%d ", i % (this->lastInst / 2));
@@ -169,18 +156,6 @@ void ProcessScheduler::StartScheduler() {
     }
 }
 
-void ProcessScheduler::PrintSchedule(std::string d) {
-
-
-    printf("---------------------------------------\n");
-    for (int i = 0; i < this->numOfProcess; i++) {
-        for (int j = 0; j < this->lastInst; j++) {
-            printf("%c|", *(this->traceDisplay + i * this->numOfProcess + j));
-        }
-        printf("\n");
-    }
-}
-
 void ProcessScheduler::FCFSSchedule() {
     int wait;
     if (this->display == "trace") {
@@ -237,10 +212,10 @@ void ProcessScheduler::FCFSSchedule() {
 
 void ProcessScheduler::RRSchedule(int q) {
     std::queue<Process *> ready_p;
-
     int timer = this->processes.at(0)->arrivalT, qtm = q, process_idx = 1;
+    int min_arrivali_time = this->processes.at(0)->arrivalT;
     for (auto prc: this->processes)
-        if (prc->arrivalT == 0)
+        if (prc->arrivalT == min_arrivali_time)
             ready_p.push(this->processes.at(0));
 
     Process *x;
@@ -295,8 +270,9 @@ void ProcessScheduler::FB() {
     vector<char> result, res;
     int qtm=1;
 
+    int min_arrivali_time = this->processes.at(0)->arrivalT;
     for (auto prc: this->processes)
-        if (prc->arrivalT == 0)
+        if (prc->arrivalT == min_arrivali_time)
             priority_queue.push(this->processes.at(0));
 
     int timer = 0, process_idx = 1;
@@ -357,8 +333,9 @@ void ProcessScheduler::FB2() {
     vector<char> res;
     int timer = 0, process_idx = 1, qtm;
 
+    int min_arrivali_time = this->processes.at(0)->arrivalT;
     for (auto prc: this->processes)
-        if (prc->arrivalT == 0)
+        if (prc->arrivalT == min_arrivali_time)
             priority_queue.push(this->processes.at(0));
 
     int arr[this->numOfProcess];
@@ -421,8 +398,9 @@ void ProcessScheduler::Aging(int q) {
     std::vector<char> result;
     int timer = this->processes.at(0)->arrivalT, qtm = q, process_idx = 1;
     this->processes.at(0)->level = this->processes.at(0)->serviceT;
+    int min_arrivali_time = this->processes.at(0)->arrivalT;
     for (auto prc: this->processes)
-        if (prc->arrivalT == 0)
+        if (prc->arrivalT == min_arrivali_time)
             ready_p.push(this->processes.at(0));
     Process *x;
     int arr[this->numOfProcess];
@@ -497,8 +475,9 @@ void ProcessScheduler::SPN() {
     priority_queue<Process *, std::vector<Process *>, LessThanByLevel> priority_queue;
     Process *x;
     this->processes.at(0)->level = this->processes.at(0)->serviceT;
+    int min_arrivali_time = this->processes.at(0)->arrivalT;
     for (auto prc: this->processes)
-        if (prc->arrivalT == 0)
+        if (prc->arrivalT == min_arrivali_time)
             priority_queue.push(this->processes.at(0));
 
     x = priority_queue.top();
@@ -538,14 +517,14 @@ void ProcessScheduler::SPN() {
 }
 
 void ProcessScheduler::SRT() {
-    //TODO: meanNormT=2.00 != 2.54 recheck CalculateMean()
     priority_queue<Process *, std::vector<Process *>, LessThanBySRT> ready_p;
     int timer = this->processes.at(0)->arrivalT, qtm = 1, process_idx = 1;
-    //TODO: or push all processes that arrived first to gether to include case if many processes arrived at 0
     this->processes.at(0)->level = this->processes.at(0)->serviceT;
+    int min_arrivali_time = this->processes.at(0)->arrivalT;
     for (auto prc: this->processes)
-        if (prc->arrivalT == 0)
+        if (prc->arrivalT == min_arrivali_time)
             ready_p.push(this->processes.at(0));
+
     Process *x;
     int arr[this->numOfProcess];
     for (int p = 0; p < this->numOfProcess; p++)
@@ -602,8 +581,9 @@ void ProcessScheduler::HRRN() {
     priority_queue<Process *, std::vector<Process *>, LessThanByLevel> priority_queue;
     Process *x;
     this->processes.at(0)->level = this->processes.at(0)->serviceT;
+    int min_arrivali_time = this->processes.at(0)->arrivalT;
     for (auto prc: this->processes)
-        if (prc->arrivalT == 0)
+        if (prc->arrivalT == min_arrivali_time)
             priority_queue.push(this->processes.at(0));
     x = priority_queue.top();
     priority_queue.pop();

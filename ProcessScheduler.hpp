@@ -42,8 +42,6 @@ public:
     
     
     void CalculateMean();
-    void Prepare2DMatrix();
-    void PrintSchedule(std::string d);
     void StartScheduler();
     
     void FCFSSchedule();
@@ -54,7 +52,6 @@ public:
     void FB();
     void FB2();
     void Aging(int q);
-    void PrintResultsDebugMode();
     void PrintTraceResults();
     void PrintStatsResults();
 
