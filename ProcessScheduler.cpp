@@ -28,9 +28,15 @@ struct LessThanByLevel {
     }
 };
 
+struct LessThanBySRT {
+    bool operator()(const Process *lhs, const Process *rhs) const {
+        return lhs->level > rhs->level || (lhs->level == rhs->level && lhs->lastPush > rhs->lastPush);
+    }
+};
+
 struct LessThanByAging {
     bool operator()(const Process *lhs, const Process *rhs) const {
-        return lhs->level < rhs->level;
+        return lhs->level < rhs->level || (lhs->level == rhs->level && lhs->lastPush > rhs->lastPush);
     }
 };
 //TODO: precisin should be same as in test file
@@ -295,8 +301,10 @@ void ProcessScheduler::FB() {
 
     int timer = 0, process_idx = 1;
     int arr[this->numOfProcess];
-    for (int p = 0; p < this->numOfProcess; p++)
+    for (int p = 0; p < this->numOfProcess; p++){
         arr[p] = this->processes.at(p)->serviceT;
+        this->processes.at(p)->level=0;
+        }
     while (timer < this->lastInst) {
         Process *process_temp = priority_queue.top();
         priority_queue.pop();
@@ -354,8 +362,10 @@ void ProcessScheduler::FB2() {
             priority_queue.push(this->processes.at(0));
 
     int arr[this->numOfProcess];
-    for (int p = 0; p < this->numOfProcess; p++)
+    for (int p = 0; p < this->numOfProcess; p++){
         arr[p] = this->processes.at(p)->serviceT;
+        this->processes.at(p)->level=0;
+        }
 
     while (timer < this->lastInst) {
         Process *process_temp = priority_queue.top();
@@ -408,8 +418,6 @@ void ProcessScheduler::Aging(int q) {
     // Priority     =    ServiceT
     //
     priority_queue<Process *, std::vector<Process *>, LessThanByAging> ready_p;
-
-    q = 1;
     std::vector<char> result;
     int timer = this->processes.at(0)->arrivalT, qtm = q, process_idx = 1;
     this->processes.at(0)->level = this->processes.at(0)->serviceT;
@@ -442,10 +450,13 @@ void ProcessScheduler::Aging(int q) {
                 }
                 if (this->processes.at(j)->arrivalT == timer) {
                     this->processes.at(j)->level = this->processes.at(j)->serviceT + 1;
+                    this->processes.at(j)->lastPush=timer;
                     ready_p.push(this->processes.at(j));
                 }
             }
         }
+
+        x->lastPush=timer;
         ready_p.push(x);
         qtm = q;
     }
@@ -475,7 +486,7 @@ void ProcessScheduler::Aging(int q) {
         printf("| \n");
     }
     for (int i = 0; i < 8 + 2 * this->lastInst; i++) printf("-");
-    printf("\n");
+   printf("\n");
     printf("\n");
 
 
@@ -528,7 +539,7 @@ void ProcessScheduler::SPN() {
 
 void ProcessScheduler::SRT() {
     //TODO: meanNormT=2.00 != 2.54 recheck CalculateMean()
-    priority_queue<Process *, std::vector<Process *>, LessThanByLevel> ready_p;
+    priority_queue<Process *, std::vector<Process *>, LessThanBySRT> ready_p;
     int timer = this->processes.at(0)->arrivalT, qtm = 1, process_idx = 1;
     //TODO: or push all processes that arrived first to gether to include case if many processes arrived at 0
     this->processes.at(0)->level = this->processes.at(0)->serviceT;
@@ -557,11 +568,15 @@ void ProcessScheduler::SRT() {
                 }
                 if (this->processes.at(j)->arrivalT == timer) {
                     this->processes.at(j)->level = this->processes.at(j)->serviceT;
+
+                    this->processes.at(j)->lastPush=timer;
                     ready_p.push(this->processes.at(j));
                 }
             }
 
         }
+
+        x->lastPush=timer;
         if (x->serviceT > 0)
             ready_p.push(x);
         else

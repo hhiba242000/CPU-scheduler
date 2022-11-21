@@ -34,5 +34,6 @@ public:
     char name;
     float level=0;
     int wait;
-    
+    int lastPush;
+
 };
