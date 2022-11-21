@@ -3,7 +3,7 @@
 //  CPU scheduling
 //
 //  Created by Hayam Hiba on 11/11/2022.
-//
+//  Made in collaboration with Adel Yasser
 
 //1. FCFS (First Come First Serve)
 //2. RR (Round Robin)
@@ -21,7 +21,7 @@
 
 using namespace std;
 
-
+// Overriding structures for the priority queues ordering used depending on the policy used.
 struct LessThanByLevel {
     bool operator()(const Process *lhs, const Process *rhs) const {
         return lhs->level > rhs->level || (lhs->level == rhs->level && lhs->arrivalT > rhs->arrivalT);
@@ -40,6 +40,7 @@ struct LessThanByAging {
     }
 };
 
+// Function to calculate mean by dividing the sum by the number
 void ProcessScheduler::CalculateMean() {
     float sumOfTR = 0, sumOfNT = 0;
     for (auto x: this->processes) {
@@ -50,7 +51,7 @@ void ProcessScheduler::CalculateMean() {
     this->meanNormT = sumOfNT / (1.0 * this->numOfProcess);
 }
 
-
+// Function to print any policy result. '.' indicates wait and '*' indicates active.
 void ProcessScheduler::PrintTraceResults() {
     for (int i = 0; i < this->lastInst + 1; i++) printf("%d ", i % (this->lastInst / 2));
     printf("\n");
@@ -80,6 +81,7 @@ void ProcessScheduler::PrintTraceResults() {
     printf("\n");
 }
 
+// Function to print all required stats as in format
 void ProcessScheduler::PrintStatsResults() {
     char separator = '|';
     for (auto p: this->processes) {
@@ -124,6 +126,7 @@ void ProcessScheduler::PrintStatsResults() {
 
 }
 
+// Start Scheduler depending on policy and quantum given.
 void ProcessScheduler::StartScheduler() {
     switch (this->policy) {
         case 1:
@@ -165,6 +168,7 @@ void ProcessScheduler::FCFSSchedule() {
         for (int i = 0; i < 8 + 2 * this->lastInst; i++) printf("-");
         printf("\n");
 
+        // Loop over every process that runs till it finishes execution. first come first serve.
         wait = 0;
         Process *x;
         for (int j = 0; j < this->numOfProcess; j++) {
@@ -206,11 +210,12 @@ void ProcessScheduler::FCFSSchedule() {
         }
         PrintStatsResults();
     }
-    //make sure processes are sorted by arrival time
+    // make sure processes are sorted by arrival time (confirmed on piazza)
 
 }
 
 void ProcessScheduler::RRSchedule(int q) {
+    // Standard queue is required for each process since we have no priorities.
     std::queue<Process *> ready_p;
     int timer = this->processes.at(0)->arrivalT, qtm = q, process_idx = 1;
     int min_arrivali_time = this->processes.at(0)->arrivalT;
@@ -223,6 +228,7 @@ void ProcessScheduler::RRSchedule(int q) {
     for (int p = 0; p < this->numOfProcess; p++)
         arr[p] = this->processes.at(p)->serviceT;
 
+    // Loop until last instant is reached. pop the front of the queue. process it for quantum time and push it back into the queue.
     while (!ready_p.empty() && timer < this->lastInst) {
         x = ready_p.front();
         ready_p.pop();
@@ -237,12 +243,14 @@ void ProcessScheduler::RRSchedule(int q) {
                     process_idx = j;
                     break;
                 }
+                // if a process arrives now, push it in the queue
                 if (this->processes.at(j)->arrivalT == timer) {
                     ready_p.push(this->processes.at(j));
                 }
             }
 
         }
+        // Push it in the queue if it didn't finish, else it ended so save finish time
         if (x->serviceT > 0)
             ready_p.push(x);
         else
@@ -266,6 +274,9 @@ void ProcessScheduler::RRSchedule(int q) {
 }
 
 void ProcessScheduler::FB() {
+    // Priority queue is used to represent the feedback algorithm. Processes with higher level have lower priority and are served after.
+    // Remember, a priority queue is considered a queue of queues for each processes with the same priority value.
+    // Hence, a priority queue fits perfectly in this implementation and simplifies it.
     priority_queue<Process *, std::vector<Process *>, LessThanByLevel> priority_queue;
     vector<char> result, res;
     int qtm=1;
@@ -281,7 +292,9 @@ void ProcessScheduler::FB() {
         arr[p] = this->processes.at(p)->serviceT;
         this->processes.at(p)->level=0;
         }
+    // Loop until we reach last instant
     while (timer < this->lastInst) {
+        // Pop the first in priority queue and process it
         Process *process_temp = priority_queue.top();
         priority_queue.pop();
 
@@ -296,12 +309,14 @@ void ProcessScheduler::FB() {
                     process_idx = j;
                     break;
                 }
+                // If a process enters now. set its level and push it
                 if (this->processes.at(j)->arrivalT == timer) {
                     priority_queue.push(this->processes.at(j));
                     this->processes.at(j)->level;
                 }
             }
         }
+        // handle current process according to remaining time
         qtm=1;
         if (process_temp->serviceT > 0) {
             if (!priority_queue.empty())
@@ -328,6 +343,7 @@ void ProcessScheduler::FB() {
 }
 
 void ProcessScheduler::FB2() {
+    // Similar to FB, however quantum is 2^i depending on the queue which the process is placed (its level in the priority queue.)
     priority_queue<Process *, std::vector<Process *>, LessThanByLevel> priority_queue;
 
     vector<char> res;
@@ -392,8 +408,10 @@ void ProcessScheduler::FB2() {
 
 void ProcessScheduler::Aging(int q) {
     //
-    // Priority     =    ServiceT
+    // Priority     =    ServiceT (Based on our tokenization and for simplicity)
     //
+    // priority queue here is based on the priority + age of process.
+    // Here higher level is higher priority.
     priority_queue<Process *, std::vector<Process *>, LessThanByAging> ready_p;
     std::vector<char> result;
     int timer = this->processes.at(0)->arrivalT, qtm = q, process_idx = 1;
@@ -406,7 +424,9 @@ void ProcessScheduler::Aging(int q) {
     int arr[this->numOfProcess];
     for (int p = 0; p < this->numOfProcess; p++)
         arr[p] = this->processes.at(p)->serviceT;
+    // loop until last instant
     while (!ready_p.empty() && timer < this->lastInst) {
+        // pop the first in queue. return its priority to initial priority and age every process that is in the queue
         x = ready_p.top();
         ready_p.pop();
         while (qtm > 0) {
@@ -426,6 +446,7 @@ void ProcessScheduler::Aging(int q) {
                     process_idx = j;
                     break;
                 }
+                // add newly arrived processes with their respective level and their time of adding to the queue
                 if (this->processes.at(j)->arrivalT == timer) {
                     this->processes.at(j)->level = this->processes.at(j)->serviceT + 1;
                     this->processes.at(j)->lastPush=timer;
@@ -433,7 +454,7 @@ void ProcessScheduler::Aging(int q) {
                 }
             }
         }
-
+        // return current process to priority queue with its time of adding to queue.
         x->lastPush=timer;
         ready_p.push(x);
         qtm = q;
@@ -471,6 +492,7 @@ void ProcessScheduler::Aging(int q) {
 }
 
 void ProcessScheduler::SPN() {
+    // Non-preemtive. add to queue and have the service time decide the priority in priority queue.
     int wait = 0, timer = 0;
     priority_queue<Process *, std::vector<Process *>, LessThanByLevel> priority_queue;
     Process *x;
@@ -482,7 +504,7 @@ void ProcessScheduler::SPN() {
 
     x = priority_queue.top();
     priority_queue.pop();
-
+    // Loop over every process according to arrival time
     for (int j = 1; j <= this->numOfProcess; j++) {
         timer += x->serviceT;
         x->finishT = timer;
@@ -517,6 +539,7 @@ void ProcessScheduler::SPN() {
 }
 
 void ProcessScheduler::SRT() {
+    // Preemptive version of SPN. very similar but each process runs for a quantum.
     priority_queue<Process *, std::vector<Process *>, LessThanBySRT> ready_p;
     int timer = this->processes.at(0)->arrivalT, qtm = 1, process_idx = 1;
     this->processes.at(0)->level = this->processes.at(0)->serviceT;
@@ -577,6 +600,7 @@ void ProcessScheduler::SRT() {
 }
 
 void ProcessScheduler::HRRN() {
+    // very similar to SPN however highest response ratio is the level of priority queue
     int wait = 0, timer = 0;
     priority_queue<Process *, std::vector<Process *>, LessThanByLevel> priority_queue;
     Process *x;
