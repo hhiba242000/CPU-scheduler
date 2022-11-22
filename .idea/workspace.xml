@@ -19,57 +19,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0acf719-1821-4aaa-ae21-eaaa5b264639" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Process.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProcessScheduler.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RR" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/01a-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/01a-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/01b-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/01b-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/02a-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/02a-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/02b-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/02b-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/03a-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/03a-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/03b-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/03b-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/04a-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/04a-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/04b-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/04b-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/05a-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/05a-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/05b-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/05b-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/06a-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/06a-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/06b-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/06b-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/07a-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/07a-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/07b-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/07b-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/08a-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/08a-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/08b-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/08b-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/09a-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/09a-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/09b-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/09b-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/10a-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/10a-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/10b-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/10b-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/11a-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/11a-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/12a-input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4-initial-testcases-v7/12a-output.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4.l" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab4.y" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,6 +107,7 @@
       <workItem from="1668509002587" duration="17373000" />
       <workItem from="1668704574953" duration="19421000" />
       <workItem from="1668874786689" duration="4393000" />
+      <workItem from="1669111390813" duration="3000" />
     </task>
     <servers />
   </component>
