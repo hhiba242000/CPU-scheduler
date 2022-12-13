@@ -19,7 +19,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0acf719-1821-4aaa-ae21-eaaa5b264639" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +67,8 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -107,7 +108,10 @@
       <workItem from="1668509002587" duration="17373000" />
       <workItem from="1668704574953" duration="19421000" />
       <workItem from="1668874786689" duration="4393000" />
-      <workItem from="1669111390813" duration="3000" />
+      <workItem from="1669111390813" duration="68000" />
+      <workItem from="1669111542466" duration="851000" />
+      <workItem from="1670156984132" duration="74000" />
+      <workItem from="1670946813093" duration="3000" />
     </task>
     <servers />
   </component>
